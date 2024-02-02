@@ -1,0 +1,51 @@
+---
+- name: copy config bind
+  template:
+    src: templates/named.conf.default-zones
+    dest: /etc/bind/named.conf.default-zones
+    owner: root
+    group: bind
+    mode: 0640
+
+- name: copy config bind
+  copy:
+    src: templates/named.conf.options
+    dest: /etc/bind/named.conf.options
+    owner: root
+    group: bind
+    mode: 0640
+
+- name: copy zones configuration
+  template:
+    src: "{{ item }}"
+    dest: /etc/bind/
+    owner: root
+    group: bind
+    mode: 0660
+  with_items:
+    - named.ddns.lab
+    - named.dns.lab
+    - named.dns.lab.client
+    - named.dns.lab.rev
+    - named.newdns.lab
+
+- name: copy resolv.conf to the server
+  copy: 
+    src: templates/servers-resolv.conf 
+    dest: /etc/resolv.conf 
+    owner: root 
+    group: root
+    mode: 0644
+
+- name: set /etc/bind permissions
+  file:
+    path: /etc/bind
+    owner: root
+    group: bind
+    mode: 0670
+
+- name: ensure bind is running and enabled
+  service: 
+    name: bind9
+    state: restarted
+    enabled: yes

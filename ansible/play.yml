@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become:
+    true
+  become_method:
+    sudo
+  roles:
+        - all
+
+- hosts: ns01
+  become:
+    true
+  become_method:
+    sudo
+  roles:
+        - ns01
+
+- hosts: ns02
+  become:
+    true
+  become_method:
+    sudo
+  roles:
+        - ns02
+
+- hosts: clients
+  become:
+    true
+  become_method:
+    sudo
+  roles:
+        - clients
