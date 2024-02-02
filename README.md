@@ -25,9 +25,23 @@ IV настроить split-dns
 
 В ходе выполнения задания было принято решение использовать vagrant box: "debian/bullseye64" " version "11.20230615.1"
 
-#### I
-В Vagrantfile изменили box и добавили машину client2
-#### II
-В файле конфигурации зоны добавляем файл: 
-#### III
-#### IV
+#### I В Vagrantfile изменили box и добавили машину client2
+#### II Правим файл конфигурации зоны named.dns.lab.client
+#### III Добавляем файл конфигурации зон named.newdns.lab.client
+#### IV Добавляем файл конфигурации зоны named.dns.lab.client. Правим в файле настроек bind9 view для client и client2
+
+#### Проверка задания
+В ansible задачи сопровождаются комментарием
+На клиентах проверяем отклик DNS следующими командами:
+
+```dig @192.168.50.10 web1.dns.lab```
+
+```dig @192.168.50.10 web2.dns.lab```
+
+```dig @192.168.50.10 www.newdns.lab```
+
+```dig @192.168.50.11 web1.dns.lab```
+
+```dig @192.168.50.11 web2.dns.lab```
+
+```dig @192.168.50.11 www.newdns.lab```
