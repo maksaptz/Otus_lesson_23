@@ -23,14 +23,6 @@
     group: root
     mode: 0644
 
-- name: Create a directory for slaves zone
-  file:
-    path: /etc/bind/slaves
-    state: directory
-    owner: root
-    group: bind
-    mode: '0640'
-
 - name: set /etc/bind permissions
   file:
     path: /etc/bind
